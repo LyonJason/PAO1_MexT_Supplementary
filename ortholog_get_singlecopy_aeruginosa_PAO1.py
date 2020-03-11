@@ -23,7 +23,7 @@ def check_aeruginosa(df):
     
 def check_single_copy(df,file_name):
     try:
-        copy_count = df['Strain'].value_counts()['Pseudomonas aeruginosa UCBPP-PA14']
+        copy_count = df['Strain'].value_counts()['Pseudomonas aeruginosa PAO1 (Reference)']
     except Exception as e:
         print(file_name)
         return False
@@ -38,7 +38,7 @@ def main():
     
     for _file_ in path:
         file_name = str(os.path.basename(_file_)).split('.')[0]
-        out_path = '/mnt/sdb1/home/liuyang/other_people_analysis/stephen/PA_14_evolution/singlecopy_gene_tab/%s.filtered.tab'%file_name
+        out_path = '/mnt/sdb1/home/liuyang/analysis/PAO1_evolution/singlecopy_gene_tab/%s.filtered.tab'%file_name
         if  os.path.exists(out_path) == True:
             continue
         df = pd.read_csv(_file_,sep='\t')

@@ -41,10 +41,10 @@ def get_all_gff_name():
 # In[283]:
 
 
-#找到stephen要得86个菌株
+#找到指定菌株
 def select_strain():
     _target_ = []
-    with open('/mnt/sdb1/home/liuyang/other_people_analysis/stephen/PA_14_evolution/02_target_strain/CRISPR_strain.txt','r') as f:
+    with open('/mnt/sdb1/home/liuyang/analysis/PAO1_evolution/02_target_strain/target_strain.txt','r') as f:
         [_target_.append(x.strip()) for x in f.readlines()]
     return _target_
 
@@ -114,11 +114,11 @@ def check_divide_3_remove_stop(seq):
 
 #读取tab并且，找到gff对应seq并且写入
 def read_tab_file_and_extract(df,out_path):
-    error_path = '/mnt/sdb1/home/liuyang/other_people_analysis/stephen/PA_14_evolution/03_singlecopy_seq/error.log'
+    error_path = '/mnt/sdb1/home/liuyang/analysis/PAO1_evolution/03_singlecopy_seq/error.log'
     error_log = open(error_path,'a+')
     output = StringIO()
     for index,row in df.iterrows():
-        #如果是stephen要的菌才用
+        #如果是指定菌才用
 
         if match_strain(str(row['Strain'])) == True:
             target_gff_path = match_string(str(row['Strain']))
@@ -155,12 +155,12 @@ def read_tab_file_and_extract(df,out_path):
 
 #多进程读取tab文件
 def main():
-    path = glob.iglob(r'/mnt/sdb1/home/liuyang/other_people_analysis/stephen/PA_14_evolution/01_singlecopy_gene_tab/*.filtered.tab')
+    path = glob.iglob(r'/mnt/sdb1/home/liuyang/analysis/PAO1_evolution/01_singlecopy_gene_tab/*.filtered.tab')
     
     p = Pool(18)
     for _file_ in path:
         file_name = str(os.path.basename(_file_)).split('.')[0]
-        out_path = '/mnt/sdb1/home/liuyang/other_people_analysis/stephen/PA_14_evolution/03_singlecopy_seq/%s.gff'%file_name
+        out_path = '/mnt/sdb1/home/liuyang/analysis/PAO1_evolution/03_singlecopy_seq/%s.gff'%file_name
         if  os.path.exists(out_path) == True:
             continue
             

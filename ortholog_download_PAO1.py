@@ -3,11 +3,11 @@ from multiprocessing import Pool
 import os
 
 def main(i):
-    error_log = open('/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PA14_Ortholog/error.log','a+')
+    error_log = open('/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PAO1_Ortholog/error.log','a+')
     _id_ = i.rstrip()
     url = ('http://pseudomonas.com/orthologs/list?format=tab&extension=tab&id=%s'%_id_)
 
-    out_path = ("/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PA14_Ortholog/%s.tab"%_id_)
+    out_path = ("/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PAO1_Ortholog/%s.tab"%_id_)
     if os.path.exists(out_path) == True:
         return
     
@@ -30,10 +30,10 @@ def main(i):
         return
 
 if __name__ == '__main__':
-    with open('/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PA14_Ortholog/PA14_gene_id.txt') as f:
-        PA14_id = f.readlines()
+    with open('/mnt/sdb1/home/liuyang/Pseudomonas_database/pseudocap/PAO1_Ortholog/PAO1_gene_id.txt') as f:
+        PAO1_id = f.readlines()
     #p = Pool(18)
-    for i in PA14_id:
+    for i in PAO1_id:
         main(i)
         #p.apply_async(main,args=(i,))
     #p.close()
